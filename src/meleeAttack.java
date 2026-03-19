@@ -15,7 +15,9 @@ public class meleeAttack implements attackStrategy{
     }
 
     @Override
-    public void attackTarget(String attackName) {
+    public void attackTarget(String attackerName) {
+        System.out.println(attackerName + " used " + attackName);
+        System.out.println("Damage dealt: " + damage);
     }
 
     @Override
