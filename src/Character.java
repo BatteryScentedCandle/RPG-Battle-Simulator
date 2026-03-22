@@ -4,9 +4,6 @@ public abstract class Character {
     int health;
     int attackPower;
     int shield;
-//    int level;
-//    int xp;
-//    int xpToNextLevel; //might be used if we have time
 
     public Character(String name, int maxHealth, int health, int attackPower, int defense) {
         this.name = name;
@@ -34,7 +31,7 @@ public abstract class Character {
         }
     }
 
-    //add attack function once buffs and debuffs are figured out
+    //TODO: attack function once buffs and debuffs are figured out
 
     public int getHealth() {
         return health;
@@ -54,5 +51,23 @@ public abstract class Character {
 
     public String getName() {
         return name;
+    }
+}
+
+class Warrior extends Character{
+    public Warrior(String name, int maxHealth, int health, int attackPower, int defense) {
+        super(name, maxHealth, health, attackPower, defense);
+    }
+}
+
+class Archer extends Character{
+    public Archer(String name, int maxHealth, int health, int attackPower, int defense) {
+        super(name, maxHealth, health, attackPower, defense);
+    }
+}
+
+class Magician extends Character{
+    public Magician(String name, int maxHealth, int health, int attackPower, int defense) {
+        super(name, maxHealth, health, attackPower, defense);
     }
 }
