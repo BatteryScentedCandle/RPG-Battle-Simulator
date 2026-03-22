@@ -1,14 +1,12 @@
 public class magicAttack implements attackStrategy{
     private String attackName;
-    private int attackSpeed;
     private int range;
     private int damage;
     private int targetCount;
-    private final String damageType = "Magic";
+    //private final String damageType = "Magic";
 
-    public magicAttack(String attackName, int attackSpeed, int range, int damage, int targetCount) {
+    public magicAttack(String attackName, int range, int damage, int targetCount) {
         this.attackName = attackName;
-        this.attackSpeed = attackSpeed;
         this.range = range;
         this.damage = damage;
         this.targetCount = targetCount;
@@ -18,10 +16,6 @@ public class magicAttack implements attackStrategy{
     public void attackTarget(String attackerName) {
         System.out.println(attackerName + " used " + attackName);
         System.out.println("Damage dealt: " + damage);
-    }
-    @Override
-    public int getAttackSpeed() {
-        return attackSpeed;
     }
 
     @Override
@@ -44,8 +38,4 @@ public class magicAttack implements attackStrategy{
         return attackName;
     }
 
-    @Override
-    public String getDamageType() {
-        return damageType;
-    }
 }
