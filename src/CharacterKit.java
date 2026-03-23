@@ -1,4 +1,6 @@
+import ConcreteStrategies.AttackStrategy;
+
 public interface CharacterKit {
     Character createCharacter();
-    attackStrategy createAttackStrategy();
+    AttackStrategy createAttackStrategy();
 }

@@ -1,11 +1,13 @@
-public class magicAttack implements attackStrategy{
+package ConcreteStrategies;
+
+public class RangedAttack implements AttackStrategy {
     private String attackName;
     private int range;
     private int damage;
     private int targetCount;
-    //private final String damageType = "Magic";
+    //private final String damageType = "Ranged";
 
-    public magicAttack(String attackName, int range, int damage, int targetCount) {
+    public RangedAttack(String attackName, int range, int damage, int targetCount) {
         this.attackName = attackName;
         this.range = range;
         this.damage = damage;
@@ -38,4 +40,9 @@ public class magicAttack implements attackStrategy{
         return attackName;
     }
 
+//    @Override
+//    public String getDamageType() {
+//        return damageType;
+//    }
 }
+

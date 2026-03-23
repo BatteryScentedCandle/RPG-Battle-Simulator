@@ -1,11 +1,13 @@
-public class meleeAttack implements attackStrategy{
+package ConcreteStrategies;
+
+public class MagicAttack implements AttackStrategy {
     private String attackName;
     private int range;
     private int damage;
     private int targetCount;
-    //private final String damageType = "Melee";
+    //private final String damageType = "Magic";
 
-    public meleeAttack(String attackName, int range, int damage, int targetCount) {
+    public MagicAttack(String attackName, int range, int damage, int targetCount) {
         this.attackName = attackName;
         this.range = range;
         this.damage = damage;
@@ -17,7 +19,6 @@ public class meleeAttack implements attackStrategy{
         System.out.println(attackerName + " used " + attackName);
         System.out.println("Damage dealt: " + damage);
     }
-
 
     @Override
     public int getRange() {
@@ -38,11 +39,5 @@ public class meleeAttack implements attackStrategy{
     public String getAttackName() {
         return attackName;
     }
-
-//    @Override
-//    public String getDamageType() {
-//        return damageType;
-//    }
-
 
 }
