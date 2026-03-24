@@ -1,6 +1,6 @@
-import ConcreteStrategies.AttackStrategy;
+import Strategies.AttackStrategy;
 
-public class attackContext {
+public class AttackContext {
     private AttackStrategy strategy;
 
     public void setStrategy(AttackStrategy strategy) {

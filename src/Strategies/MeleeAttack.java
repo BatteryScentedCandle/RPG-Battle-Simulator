@@ -1,13 +1,13 @@
-package ConcreteStrategies;
+package Strategies;
 
-public class RangedAttack implements AttackStrategy {
+public class MeleeAttack implements AttackStrategy {
     private String attackName;
     private int range;
     private int damage;
     private int targetCount;
-    //private final String damageType = "Ranged";
+    //private final String damageType = "Melee";
 
-    public RangedAttack(String attackName, int range, int damage, int targetCount) {
+    public MeleeAttack(String attackName, int range, int damage, int targetCount) {
         this.attackName = attackName;
         this.range = range;
         this.damage = damage;
@@ -44,5 +44,6 @@ public class RangedAttack implements AttackStrategy {
 //    public String getDamageType() {
 //        return damageType;
 //    }
-}
 
+
+}

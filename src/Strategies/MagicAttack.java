@@ -1,4 +1,4 @@
-package ConcreteStrategies;
+package Strategies;
 
 public class MagicAttack implements AttackStrategy {
     private String attackName;

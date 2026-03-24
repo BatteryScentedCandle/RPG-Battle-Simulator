@@ -1,4 +1,4 @@
-package ConcreteStrategies;
+package Strategies;
 
 public interface AttackStrategy {
     void attackTarget(String attackerName);
