@@ -1,11 +1,13 @@
-public abstract class Character {
+package Factories;
+
+public abstract class CharacterClass {
     String name;
     int maxHealth;
     int health;
     int attackPower;
     int shield;
 
-    public Character(String name, int maxHealth, int health, int attackPower, int defense) {
+    public CharacterClass(String name, int maxHealth, int health, int attackPower, int defense) {
         this.name = name;
         this.maxHealth = maxHealth;
         this.health = maxHealth;
@@ -32,6 +34,9 @@ public abstract class Character {
     }
 
     //TODO: attack function once buffs and debuffs are figured out
+    public boolean isAlive() {
+        return getHealth() > 0;
+    }
 
     public int getHealth() {
         return health;
@@ -54,20 +59,21 @@ public abstract class Character {
     }
 }
 
-class Warrior extends Character{
+class Warrior extends CharacterClass {
     public Warrior(String name, int maxHealth, int health, int attackPower, int defense) {
         super(name, maxHealth, health, attackPower, defense);
     }
 }
 
-class Archer extends Character{
+class Archer extends CharacterClass {
     public Archer(String name, int maxHealth, int health, int attackPower, int defense) {
         super(name, maxHealth, health, attackPower, defense);
     }
 }
 
-class Magician extends Character{
+class Magician extends CharacterClass {
     public Magician(String name, int maxHealth, int health, int attackPower, int defense) {
         super(name, maxHealth, health, attackPower, defense);
     }
 }
+

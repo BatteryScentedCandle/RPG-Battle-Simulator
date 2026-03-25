@@ -1,13 +1,15 @@
-class Player implements Observer {
-   private Character character;
+import Factories.CharacterClass;
 
-    public Player(Character character) {
+class Player implements Observer {
+   private CharacterClass character;
+
+    public Player(CharacterClass character) {
         this.character = character;
     }
 
     //Pending changes
     @Override
     public void update(String message) {
-        System.out.println(character.name + "message: " + message);
+        System.out.println(character.getName() + "message: " + message);
     }
 }

@@ -7,7 +7,5 @@ public class AttackContext {
         this.strategy = strategy;
     }
 
-    public void executeAttack(String attacker) {
-        strategy.attackTarget(attacker);
-    }
+    //Ok tbh I dont know what this class is for
 }

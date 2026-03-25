@@ -1,15 +1,19 @@
 package Commands;
 
+import Strategies.AttackStrategy;
+
 public class AttackCommand implements Command{
 
-    private PlayerAction playerAction;
+    private final ActionReceiver receiver;
+    private final int damage;
 
-    public AttackCommand(PlayerAction playerAction) {
-        this.playerAction = playerAction;
+    public AttackCommand(ActionReceiver playerAction, int damage) {
+        this.receiver = playerAction;
+        this.damage = damage;
     }
 
     @Override
     public void execute() {
-        playerAction.act();
+        receiver.performAttack(damage);
     }
 }

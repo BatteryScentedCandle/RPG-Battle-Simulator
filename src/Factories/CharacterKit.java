@@ -1,6 +1,8 @@
+package Factories;
+
 import Strategies.AttackStrategy;
 
 public interface CharacterKit {
-    Character createCharacter();
+    CharacterClass createCharacter(String name);
     AttackStrategy createAttackStrategy();
 }

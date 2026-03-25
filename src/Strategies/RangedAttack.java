@@ -15,12 +15,6 @@ public class RangedAttack implements AttackStrategy {
     }
 
     @Override
-    public void attackTarget(String attackerName) {
-        System.out.println(attackerName + " used " + attackName);
-        System.out.println("Damage dealt: " + damage);
-    }
-
-    @Override
     public int getRange() {
         return range;
     }

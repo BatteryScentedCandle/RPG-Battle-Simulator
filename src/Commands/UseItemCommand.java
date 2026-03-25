@@ -1,7 +1,7 @@
 package Commands;
 
 public class UseItemCommand implements Command{
-    private PlayerAction playerAction;
+    private ActionReceiver receiver;
 
     @Override
     public void execute() {

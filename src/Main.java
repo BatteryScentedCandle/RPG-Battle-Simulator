@@ -1,90 +1,88 @@
 import java.util.Scanner;
 
 import Commands.*;
-import Strategies.MeleeAttack;
+import Factories.*;
+import Strategies.*;
 
 public class Main {
 
-    //Note: This main is for testing and may be changed in the future in case I have time to complete the UI
-    //Else, Ill just streamline it
     private static int getValidInput(String prompt, int min, int max) {
         Scanner scanner = new Scanner(System.in);
-        int choice = -1;
+        int choice;
+
         while (true) {
             System.out.print(prompt);
             if (scanner.hasNextInt()) {
                 choice = scanner.nextInt();
                 if (choice >= min && choice <= max) {
-                    break;
-                } else {
-                    System.out.println("Invalid input. Please enter a number between " + min + " and " + max + ".");
+                    return choice;
                 }
             } else {
-                System.out.println("Invalid input. Please enter a number.");
-                scanner.next();
+                scanner.next(); // clear invalid input
             }
+            System.out.println("Invalid input. Try again.");
         }
-        return choice;
     }
 
     public static void main(String[] args) {
 
         String defaultName = "Terra";
 
-        Character character = null;
-        System.out.println("\nChoose Class");
+        // ===== CLASS SELECTION =====
+        System.out.println("\nChoose Character Class: ");
         System.out.println("1 - Warrior");
         System.out.println("2 - Archer");
         System.out.println("3 - Magician");
+
         int classChoice = getValidInput("Enter choice (1-3): ", 1, 3);
 
+        CharacterKit kit = null;
+
         switch (classChoice) {
-            case 1: character = new Warrior(defaultName, 100, 100, 20, 20);      break;
-            case 2: character = new Archer(defaultName, 125, 125, 10, 30);       break;
-            case 3: character = new Magician(defaultName, 70, 70, 30, 10); break;
+            case 1: kit = new FactoryWarrior(); break;
+            case 2: kit = new FactoryArcher(); break;
+            case 3: kit = new FactoryMage(); break;
         }
 
-        Player player = new Player(character);
-        Monster monster = new Monster();
-        AttackContext context = new AttackContext();
+        // Create player using factory
+        assert kit != null;
+        CharacterClass playerCharacter = kit.createCharacter(defaultName);
 
-        PlayerAction playerAction = new PlayerAction();
-        Command command = null;
-        ActionInvoker actionInvoker = new ActionInvoker();
+        // Create enemy directly (boss for now)
+        CharacterClass enemyCharacter = new Boss("Enemy", 1000, 1000, 10, 10);
 
-        System.out.println("Current Turn: " + character.name);
+        // Commands.ActionReceiver (handles actions)
+        ActionReceiver receiver = new ActionReceiver(playerCharacter, enemyCharacter);
+        ActionInvoker invoker = new ActionInvoker();
+
+        System.out.println("\nCurrent Turn: " + playerCharacter.getName());
+
+        // ===== ACTION SELECTION =====
         System.out.println("\nChoose Action");
         System.out.println("1 - Attack");
         System.out.println("2 - Defend");
-        System.out.println("3 - UseItem");
+        System.out.println("3 - Use Item");
         System.out.println("4 - Run");
+
         int actionChoice = getValidInput("Enter choice (1-4): ", 1, 4);
 
-        switch (actionChoice) {
-            case 1: command = new AttackCommand(playerAction);       break;
-            case 2:  break;  //Lowers enemy attack
-            case 3:  break; //Use potion ig?
-            case 4: break; //Chance to run, new enemy is summoned
-        }
-
-        //Assume Attack was chosen
-        //For now I made it so that you can choose any of the available attack types
-
-        System.out.println("\nChoose Action");
-        System.out.println("1 - Melee");
-        System.out.println("2 - Magic");
-        System.out.println("3 - Ranged");
-        int attackChoice = getValidInput("Enter choice (1-3): ", 1, 3);
+        Command command = null;
 
         switch (actionChoice) {
-            case 1: context.setStrategy(new MeleeAttack("ChuChu", 1, character.getAttackPower(), 1));     break;
-            case 2:  break;  //Lowers enemy attack
-            case 3:  break; //Use potion ig?
+            case 1:
+                command = new AttackCommand(receiver, playerCharacter.getAttackPower());
+                command.execute();
+                break;
+            case 2:
+                //pending
+                return;
+            case 3:
+                //pending
+                return;
+            case 4:
+                //pending
+                return;
         }
-
-        context.executeAttack(character.name);
-
-
-
     }
+
 }
