@@ -1,6 +1,6 @@
 package Effects;
 
-public interface EffectDecorator {
+public interface Effects {
     void applyEffect();
     void removeEffect();
     String effectName();
