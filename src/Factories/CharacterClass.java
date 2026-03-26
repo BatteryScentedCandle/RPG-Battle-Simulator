@@ -1,11 +1,20 @@
 package Factories;
 
+import Effects.Effects;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class CharacterClass {
     String name;
+    String attackName;
     int maxHealth;
     int health;
     int attackPower;
     int shield;
+    final int baseShield;
+    private List<Effects> activeEffects = new ArrayList<>();
+
 
     public CharacterClass(String name, int maxHealth, int health, int attackPower, int defense) {
         this.name = name;
@@ -13,16 +22,34 @@ public abstract class CharacterClass {
         this.health = maxHealth;
         this.attackPower = attackPower;
         this.shield = defense;
+        this.baseShield = defense;
     }
 
-    public void takeDamage(int damage){
-        int net = damage - shield;
-        if (net < 0){
-            net = 0;
+    public void takeDamage(int baseDamage){
+        int actualDamage = baseDamage - shield;
+        if (actualDamage < 0){
+            actualDamage = 0;
         }
-        health -= net;
+        health -= actualDamage;
         if (health < 0){
             health = 0;
+        }
+    }
+
+    public void addEffect(Effects effect) {
+        activeEffects.add(effect);
+        effect.applyEffect();
+    }
+
+    public void removeEffect(Effects effect) {
+        activeEffects.remove(effect);
+        effect.removeEffect();
+    }
+
+    public void tickEffects() {
+        activeEffects.removeIf(e -> e.effectTurns() <= 0);
+        for (Effects e : activeEffects) {
+            e.applyEffect();
         }
     }
 
@@ -31,6 +58,18 @@ public abstract class CharacterClass {
         if (health > maxHealth){
             health = maxHealth;
         }
+    }
+
+    public void addDefense(int defense){
+        shield += defense;
+    }
+
+    public void removeDefense(int defense) {
+        shield = Math.max(baseShield, shield - defense);
+    }
+
+    public void addAttack(int attack){
+        attackPower += attack;
     }
 
     //TODO: attack function once buffs and debuffs are figured out

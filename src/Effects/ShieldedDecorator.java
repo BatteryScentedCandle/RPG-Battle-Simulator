@@ -1,5 +1,7 @@
 package Effects;
 
+import Factories.CharacterClass;
+
 public class ShieldedDecorator extends EffectsDecorator{
 
     public ShieldedDecorator(Effects effects){
@@ -7,7 +9,6 @@ public class ShieldedDecorator extends EffectsDecorator{
     }
 
     public void applyEffect() {
-
     }
 
     public void removeEffect() {

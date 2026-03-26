@@ -1,14 +1,8 @@
 package Effects;
 
-public class PoisonedDecorator extends EffectsDecorator{
-
-    public PoisonedDecorator(Effects effects) {
-        super(effects);
-    }
-
+public class NullDecorater implements Effects {
     @Override
     public void applyEffect() {
-
     }
 
     @Override

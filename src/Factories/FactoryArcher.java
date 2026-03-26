@@ -12,7 +12,7 @@ public class FactoryArcher implements CharacterKit {
                 175,
                 175,
                 20,
-                15
+                20
         );
     }
 

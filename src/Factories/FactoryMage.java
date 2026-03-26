@@ -12,7 +12,7 @@ public class FactoryMage implements CharacterKit {
                 125,
                 125,
                 30,
-                5
+                15
         );
     }
 

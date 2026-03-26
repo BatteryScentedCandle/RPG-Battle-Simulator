@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 import Commands.*;
 import Factories.*;
+import Observers.CombatLogger;
 import Strategies.*;
 
 public class Main {
@@ -24,8 +25,10 @@ public class Main {
         }
     }
 
+
     public static void main(String[] args) {
 
+        //TODO add ability to input char name in character creation
         String defaultName = "Terra";
 
         // ===== CLASS SELECTION =====
@@ -39,50 +42,76 @@ public class Main {
         CharacterKit kit = null;
 
         switch (classChoice) {
-            case 1: kit = new FactoryWarrior(); break;
-            case 2: kit = new FactoryArcher(); break;
-            case 3: kit = new FactoryMage(); break;
+            case 1:
+                kit = new FactoryWarrior();
+                break;
+            case 2:
+                kit = new FactoryArcher();
+                break;
+            case 3:
+                kit = new FactoryMage();
+                break;
         }
 
         // Create player using factory
         assert kit != null;
         CharacterClass playerCharacter = kit.createCharacter(defaultName);
+        AttackStrategy attackStrategy = kit.createAttackStrategy();
 
-        // Create enemy directly (boss for now)
-        CharacterClass enemyCharacter = new Boss("Enemy", 1000, 1000, 10, 10);
 
-        // Commands.ActionReceiver (handles actions)
+        // TODO Randomize Enemy Stats to create diversity
+        CharacterClass enemyCharacter = new Boss("[Boss] - Kefla", 150, 150, 50, 10);
+
         ActionReceiver receiver = new ActionReceiver(playerCharacter, enemyCharacter);
-        ActionInvoker invoker = new ActionInvoker();
+        ActionInvoker invoker = new ActionInvoker(playerCharacter, enemyCharacter, receiver);
+        receiver.addObserver(new CombatLogger());
 
-        System.out.println("\nCurrent Turn: " + playerCharacter.getName());
+        while (playerCharacter.isAlive() && enemyCharacter.isAlive()) {
 
-        // ===== ACTION SELECTION =====
-        System.out.println("\nChoose Action");
-        System.out.println("1 - Attack");
-        System.out.println("2 - Defend");
-        System.out.println("3 - Use Item");
-        System.out.println("4 - Run");
+            // Display HUD
+            System.out.println("\n================================");
+            System.out.printf("  %s   HP: %d/%d%n",
+                    playerCharacter.getName(), playerCharacter.getHealth(), playerCharacter.getMaxHealth());
+            System.out.printf("  %s   HP: %d/%d%n",
+                    enemyCharacter.getName(), enemyCharacter.getHealth(), enemyCharacter.getMaxHealth());
+            System.out.println("================================");
 
-        int actionChoice = getValidInput("Enter choice (1-4): ", 1, 4);
+            // Player picks action
+            System.out.println("\n1 - Attack  2 - Defend");
+            System.out.println("3 - Use Item  4 - Run\n");
+            int actionChoice = getValidInput("Enter choice (1-4): ", 1, 4);
 
-        Command command = null;
+            Command command = null;
 
-        switch (actionChoice) {
-            case 1:
-                command = new AttackCommand(receiver, playerCharacter.getAttackPower());
-                command.execute();
-                break;
-            case 2:
-                //pending
-                return;
-            case 3:
-                //pending
-                return;
-            case 4:
-                //pending
-                return;
+            switch (actionChoice) {
+                case 1:
+                    command = new AttackCommand(receiver, attackStrategy, playerCharacter.getAttackPower());
+                    break;
+                case 2:
+                    command = new DefendCommand(receiver);
+                    break;
+                case 3:
+                    command = new UseItemCommand(receiver);
+                    break;
+                case 4:
+                    System.out.println("You can't run...");
+                    return;
+            }
+
+            if (command != null) {
+                invoker.executePlayerAction(command);  // player acts
+
+                if(enemyCharacter.isAlive()) {
+                    invoker.executeEnemyTurn();  // enemy responds
+                }
+            }
         }
-    }
 
+        if (playerCharacter.isAlive()) {
+            System.out.println("\n🏆 VICTORY! " + enemyCharacter.getName() + " was killed by " + defaultName + "!");
+        } else {
+            System.out.println("\n💀 DEFEAT! " + playerCharacter.getName() + " has fallen...");
+        }
+
+    }
 }
