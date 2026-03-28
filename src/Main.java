@@ -57,6 +57,7 @@ public class Main {
         assert kit != null;
         CharacterClass playerCharacter = kit.createCharacter(defaultName);
         AttackStrategy attackStrategy = kit.createAttackStrategy();
+        AttackContext attackContext = new AttackContext(attackStrategy);
 
 
         // TODO Randomize Enemy Stats to create diversity
@@ -85,7 +86,7 @@ public class Main {
 
             switch (actionChoice) {
                 case 1:
-                    command = new AttackCommand(receiver, attackStrategy, playerCharacter.getAttackPower());
+                    command = new AttackCommand(receiver, attackContext, playerCharacter.getAttackPower());
                     break;
                 case 2:
                     command = new DefendCommand(receiver);

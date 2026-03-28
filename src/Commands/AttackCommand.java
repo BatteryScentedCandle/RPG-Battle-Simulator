@@ -1,23 +1,22 @@
 package Commands;
 
-import Strategies.AttackStrategy;
+import Strategies.AttackContext;
 
-public class AttackCommand implements Command{
-
+public class AttackCommand implements Command {
     private final ActionReceiver receiver;
-    private final AttackStrategy strategy;
-    private final int damage;
+    private final AttackContext context;
+    private final int baseAttackPower;
 
-    public AttackCommand(ActionReceiver playerAction, AttackStrategy strategy, int damage) {
-        this.receiver = playerAction;
-        this.strategy = strategy;
-        this.damage = damage;
+    public AttackCommand(ActionReceiver receiver, AttackContext context, int baseAttackPower) {
+        this.receiver = receiver;
+        this.context = context;
+        this.baseAttackPower = baseAttackPower;
     }
 
     @Override
     public void execute() {
-        int totalDamage = damage + strategy.getDamage();
-        String attackName = strategy.getAttackName();
+        int totalDamage = context.calculateDamage(baseAttackPower);
+        String attackName = context.getAttackName();
         receiver.performAttack(totalDamage, attackName);
     }
 }
