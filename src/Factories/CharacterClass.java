@@ -7,7 +7,6 @@ import java.util.List;
 
 public abstract class CharacterClass {
     String name;
-    String attackName;
     int maxHealth;
     int health;
     int attackPower;
