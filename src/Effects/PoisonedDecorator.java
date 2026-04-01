@@ -14,7 +14,7 @@ public class PoisonedDecorator extends EffectsDecorator{
 
     @Override
     public void applyEffect() {
-        target.takeDamage(turns * 2); //deals massive damage that will decrease with each turn
+        target.takeDamage(turns); //deals damage that will decrease with each turn (I might make this *1.5 for craps and giggles)
         turns --;
         System.out.println(target.getName() + " has been poisoned (" + turns + " turns left)");
     }

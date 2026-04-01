@@ -2,6 +2,7 @@ package Commands;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 import Effects.*;
@@ -78,9 +79,25 @@ public class ActionReceiver {
 
    //TODO EFFECTS
    public void useRougeDoll() {
-      Effects burn = new BurningDecorator(new NullDecorater(), enemyCharacter);
-      burn.applyEffect();
-      enemyCharacter.addEffect(burn);
+       Random random = new Random();
+       int randomEffect = random.nextInt(2); //add +1 if you need to add more effects
+
+       switch (randomEffect){
+           case 0:
+               Effects burn = new BurningDecorator(new NullDecorater(), enemyCharacter);
+               burn.applyEffect();
+               enemyCharacter.addEffect(burn);
+
+           case 1:
+               Effects poison = new PoisonedDecorator(new NullDecorater(), enemyCharacter);
+               poison.applyEffect();
+               enemyCharacter.addEffect(poison);
+
+           case 2:
+               Effects shielded = new ShieldedDecorator(new NullDecorater(), playerCharacter);
+               shielded.applyEffect();
+               playerCharacter.addEffect(shielded);
+       }
    }
 
 
