@@ -27,9 +27,10 @@ public class Main {
 
 
     public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
 
-        //TODO add ability to input char name in character creation
-        String defaultName = "Terra";
+        System.out.println("What is your name? ");
+        String defaultName = scan.next();
 
         // ===== CLASS SELECTION =====
         System.out.println("\nChoose Character Class: ");
