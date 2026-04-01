@@ -5,4 +5,5 @@ public interface Effects {
     void removeEffect();
     String effectName();
     int effectTurns();
+    void tick();
 }

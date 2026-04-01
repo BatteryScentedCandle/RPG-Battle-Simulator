@@ -15,6 +15,7 @@ public class ActionReceiver {
    private List<CombatObserver> observers = new ArrayList<>();
    private int tempDefenseBonus = 0;
    private boolean isDefending = false;
+   private boolean isBraved = false;
 
 
    public ActionReceiver(CharacterClass playerCharacter, CharacterClass enemyCharacter) {
@@ -76,7 +77,6 @@ public class ActionReceiver {
       playerCharacter.healDamage(playerCharacter.getMaxHealth());
    }
 
-
    //TODO EFFECTS
    public void useRougeDoll() {
        Random random = new Random();
@@ -84,20 +84,27 @@ public class ActionReceiver {
 
        switch (randomEffect){
            case 0:
-               Effects burn = new BurningDecorator(new NullDecorater(), enemyCharacter);
-               burn.applyEffect();
-               enemyCharacter.addEffect(burn);
+              Effects burn = new BurningDecorator(new NullDecorater(), enemyCharacter);
+              enemyCharacter.addEffect(burn);
+              notifyEffectApplied(enemyCharacter.getName(), burn.effectName());
+              break;
 
            case 1:
                Effects poison = new PoisonedDecorator(new NullDecorater(), enemyCharacter);
-               poison.applyEffect();
                enemyCharacter.addEffect(poison);
-
-           case 2:
-               Effects shielded = new ShieldedDecorator(new NullDecorater(), playerCharacter);
-               shielded.applyEffect();
-               playerCharacter.addEffect(shielded);
+              notifyEffectApplied(enemyCharacter.getName(), poison.effectName());
+               break;
        }
+   }
+
+
+   // --- Brave --- This is meant to replace run, this acts as the attackbuff effect to the user
+   public void performBrave() {
+      if (isBraved) return; // prevent stacking
+      Effects attackBuff = new AttackBuffDecorator(new NullDecorater(), playerCharacter);
+      playerCharacter.addEffect(attackBuff);
+      isBraved = true;
+      notifyEffectApplied(playerCharacter.getName(), attackBuff.effectName());
    }
 
 
@@ -118,5 +125,8 @@ public class ActionReceiver {
       observers.forEach(o -> o.onTurnStart(name));
    }
 
+   private void notifyEffectApplied(String target, String effectName) {
+      observers.forEach(o -> o.onEffectApplied(target, effectName));
+   }
 
 }

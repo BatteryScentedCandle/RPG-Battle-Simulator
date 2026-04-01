@@ -14,9 +14,13 @@ public class BurningDecorator extends EffectsDecorator{
 
     @Override
     public void applyEffect() {
-        target.takeDamage(5); // burn tick damage
-        turns--;
+        target.takeTrueDamage(5);
         System.out.println(target.getName() + " is burning! (" + turns + " turns left)");
+    }
+
+    @Override
+    public void tick() {
+        turns--;
     }
 
     @Override

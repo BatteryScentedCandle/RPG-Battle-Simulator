@@ -19,4 +19,9 @@ public class NullDecorater implements Effects {
     public int effectTurns() {
         return 0;
     }
+
+    @Override
+    public void tick() {
+
+    }
 }

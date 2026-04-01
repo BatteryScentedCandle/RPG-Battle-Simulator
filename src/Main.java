@@ -29,7 +29,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("What is your name? ");
+        System.out.print("What is your name? ");
         String defaultName = scan.next();
 
         // ===== CLASS SELECTION =====
@@ -80,14 +80,14 @@ public class Main {
 
             // Player picks action
             System.out.println("\n1 - Attack  2 - Defend");
-            System.out.println("3 - Use Item  4 - Run\n");
+            System.out.println("3 - Use Item  4 - Brave\n");
             int actionChoice = getValidInput("Enter choice (1-4): ", 1, 4);
 
             Command command = null;
 
             switch (actionChoice) {
                 case 1:
-                    command = new AttackCommand(receiver, attackContext, playerCharacter.getAttackPower());
+                    command = new AttackCommand(receiver, attackContext, playerCharacter);
                     break;
                 case 2:
                     command = new DefendCommand(receiver);
@@ -96,8 +96,8 @@ public class Main {
                     command = new UseItemCommand(receiver);
                     break;
                 case 4:
-                    System.out.println("You can't run...");
-                    return;
+                    command = new BraveCommand(receiver);
+                    break;
             }
 
             if (command != null) {

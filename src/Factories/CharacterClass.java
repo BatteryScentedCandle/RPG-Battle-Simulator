@@ -9,17 +9,19 @@ public abstract class CharacterClass {
     String name;
     int maxHealth;
     int health;
-    int attackPower;
+    int attack;
+    int baseAttack;
     int shield;
     final int baseShield;
     private List<Effects> activeEffects = new ArrayList<>();
 
 
-    public CharacterClass(String name, int maxHealth, int health, int attackPower, int defense) {
+    public CharacterClass(String name, int maxHealth, int health, int attack, int defense) {
         this.name = name;
         this.maxHealth = maxHealth;
         this.health = maxHealth;
-        this.attackPower = attackPower;
+        this.attack = attack;
+        this.baseAttack = attack;
         this.shield = defense;
         this.baseShield = defense;
     }
@@ -35,21 +37,30 @@ public abstract class CharacterClass {
         }
     }
 
-    public void addEffect(Effects effect) {
-        activeEffects.add(effect);
-        effect.applyEffect();
+    public void takeTrueDamage(int damage) {
+        health -= damage;
+        if (health < 0) {
+            health = 0;
+        }
+        System.out.println(getName() + " took " + damage + " damage from effects! HP: " + health);
     }
 
-    public void removeEffect(Effects effect) {
-        activeEffects.remove(effect);
-        effect.removeEffect();
+    public void addEffect(Effects effect) {
+        activeEffects.add(effect);
     }
 
     public void tickEffects() {
-        activeEffects.removeIf(e -> e.effectTurns() <= 0);
         for (Effects e : activeEffects) {
             e.applyEffect();
+            e.tick();
         }
+        activeEffects.removeIf(e -> {
+            if (e.effectTurns() <= 0) {
+                e.removeEffect(); // properly cleans up on expiry
+                return true;
+            }
+            return false;
+        });
     }
 
     public void healDamage(int heal){
@@ -67,8 +78,12 @@ public abstract class CharacterClass {
         shield = Math.max(baseShield, shield - defense);
     }
 
-    public void addAttack(int attack){
-        attackPower += attack;
+    public void addAttackBuff(int amount) {
+        attack += amount;
+    }
+
+    public void removeAttackBuff(int amount) {
+        attack = baseAttack;
     }
 
     //TODO: attack function once buffs and debuffs are figured out
@@ -85,7 +100,7 @@ public abstract class CharacterClass {
     }
 
     public int getAttackPower() {
-        return attackPower;
+        return attack;
     }
 
     public int getMaxHealth() {
