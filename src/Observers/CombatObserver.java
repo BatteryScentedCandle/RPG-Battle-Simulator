@@ -5,6 +5,6 @@ public interface CombatObserver {
     void onDefense(String attacker, int defense);
     void onEffectApplied(String target, String effectName);
     void onCharacterDeath(String name);
-    void onTurnStart(String characterName);;
+    void onTurnStart(String characterName);
 
 }

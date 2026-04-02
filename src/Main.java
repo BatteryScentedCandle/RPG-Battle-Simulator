@@ -69,6 +69,11 @@ public class Main {
         receiver.addObserver(new CombatLogger());
 
         while (playerCharacter.isAlive() && enemyCharacter.isAlive()) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
 
             // Display HUD
             System.out.println("\n================================");
