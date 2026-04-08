@@ -2,6 +2,9 @@ package Factories;
 
 import Strategies.AttackStrategy;
 import Strategies.MagicAttack;
+import Strategies.RangedAttack;
+
+import java.util.List;
 
 public class FactoryMage implements CharacterKit {
 
@@ -25,6 +28,15 @@ public class FactoryMage implements CharacterKit {
                 1
         );
     }
+
+    @Override
+    public List<AttackStrategy> createAttackStrategies() {
+        return List.of(
+                new RangedAttack("Basic Spell", 1, 20, 1),
+                new RangedAttack(generateAttackName(), 3, 40, 1)
+        );
+    }
+
 
     private String generateAttackName() {
         String[] prefixes = {"Final", "Quantum", "Abyssal", "Cosmic", "Wild"};

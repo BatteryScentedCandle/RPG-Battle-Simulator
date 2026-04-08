@@ -2,6 +2,9 @@ package Factories;
 
 import Strategies.AttackStrategy;
 import Strategies.MeleeAttack;
+import Strategies.RangedAttack;
+
+import java.util.List;
 
 public class FactoryWarrior implements CharacterKit {
 
@@ -25,6 +28,15 @@ public class FactoryWarrior implements CharacterKit {
                 1
         );
     }
+
+    @Override
+    public List<AttackStrategy> createAttackStrategies() {
+        return List.of(
+                new RangedAttack("Basic Hit", 1, 20, 1),
+                new RangedAttack(generateAttackName(), 1, 35, 1)
+        );
+    }
+
 
     private String generateAttackName() {
         String[] prefixes = {"Final", "Brutal", "Calamity", "Crushing", "Ultimate"};

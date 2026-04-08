@@ -1,6 +1,7 @@
 package Factories;
 
 import Effects.Effects;
+import Strategies.AttackStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ public abstract class CharacterClass {
     int shield;
     final int baseShield;
     private List<Effects> activeEffects = new ArrayList<>();
-
+    private List<AttackStrategy> attacks = new ArrayList<>();
 
     public CharacterClass(String name, int maxHealth, int health, int attack, int defense) {
         this.name = name;
@@ -86,7 +87,6 @@ public abstract class CharacterClass {
         attack = baseAttack;
     }
 
-    //TODO: attack function once buffs and debuffs are figured out
     public boolean isAlive() {
         return getHealth() > 0;
     }
@@ -109,6 +109,14 @@ public abstract class CharacterClass {
 
     public String getName() {
         return name;
+    }
+
+    public void setAttacks(List<AttackStrategy> attacks) {
+        this.attacks = attacks;
+    }
+
+    public List<AttackStrategy> getAttacks() {
+        return attacks;
     }
 }
 

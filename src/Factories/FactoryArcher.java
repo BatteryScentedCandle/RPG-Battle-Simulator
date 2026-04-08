@@ -3,6 +3,8 @@ package Factories;
 import Strategies.AttackStrategy;
 import Strategies.RangedAttack;
 
+import java.util.List;
+
 public class FactoryArcher implements CharacterKit {
 
     @Override
@@ -23,6 +25,14 @@ public class FactoryArcher implements CharacterKit {
                 3,
                 25,
                 1
+        );
+    }
+
+    @Override
+    public List<AttackStrategy> createAttackStrategies() {
+        return List.of(
+                new RangedAttack("Basic Shot", 1, 20, 1),
+                new RangedAttack(generateAttackName(), 3, 25, 1)
         );
     }
 

@@ -2,22 +2,24 @@ package Commands;
 
 import Factories.CharacterClass;
 import Strategies.AttackContext;
+import Strategies.AttackStrategy;
 
 public class AttackCommand implements Command {
     private final ActionReceiver receiver;
-    private final AttackContext context;
     private final CharacterClass player;
+    private final int attackIndex;          // which attack to use
 
-    public AttackCommand(ActionReceiver receiver, AttackContext context, CharacterClass player) {
+    public AttackCommand(ActionReceiver receiver, CharacterClass player, int attackIndex) {
         this.receiver = receiver;
-        this.context = context;
         this.player = player;
+        this.attackIndex = attackIndex;
     }
 
     @Override
     public void execute() {
-        int totalDamage = context.calculateDamage(player.getAttackPower()); // uses live attack value
-        String attackName = context.getAttackName();
-        receiver.performAttack(totalDamage, attackName);
+        AttackStrategy strategy = player.getAttacks().get(attackIndex);
+        AttackContext context = new AttackContext(strategy);
+        int totalDamage = context.calculateDamage(player.getAttackPower());
+        receiver.performAttack(totalDamage, context.getAttackName());
     }
 }

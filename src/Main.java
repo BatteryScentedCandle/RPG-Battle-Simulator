@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 import Commands.*;
@@ -57,8 +58,10 @@ public class Main {
         // Create player using factory
         assert kit != null;
         CharacterClass playerCharacter = kit.createCharacter(defaultName);
-        AttackStrategy attackStrategy = kit.createAttackStrategy();
-        AttackContext attackContext = new AttackContext(attackStrategy);
+        playerCharacter.setAttacks(kit.createAttackStrategies());
+//        AttackStrategy attackStrategy = kit.createAttackStrategy();
+//        AttackContext attackContext = new AttackContext(attackStrategy);
+        List<AttackStrategy> attackStrategies = kit.createAttackStrategies();
 
 
         // TODO Randomize Enemy Stats to create diversity
@@ -69,12 +72,6 @@ public class Main {
         receiver.addObserver(new CombatLogger());
 
         while (playerCharacter.isAlive() && enemyCharacter.isAlive()) {
-//            try {
-//                Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//                throw new RuntimeException(e);
-//            }
-
             // Display HUD
             System.out.println("\n================================");
             System.out.printf("  %s   HP: %d/%d%n",
@@ -92,7 +89,13 @@ public class Main {
 
             switch (actionChoice) {
                 case 1:
-                    command = new AttackCommand(receiver, attackContext, playerCharacter);
+                    System.out.println("\nChoose Attack:");
+                    List<AttackStrategy> attacks = playerCharacter.getAttacks();
+                    for (int i = 0; i < attacks.size(); i++) {
+                        System.out.printf("%d - %s%n", i + 1, attacks.get(i).getAttackName());
+                    }
+                    int attackChoice = getValidInput("Enter choice (1-" + attacks.size() + "): ", 1, attacks.size());
+                    command = new AttackCommand(receiver, playerCharacter, attackChoice - 1); // -1 to convert to 0-based index
                     break;
                 case 2:
                     command = new DefendCommand(receiver);
