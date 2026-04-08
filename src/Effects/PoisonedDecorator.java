@@ -20,7 +20,7 @@ public class PoisonedDecorator extends EffectsDecorator{
 
     @Override
     public void removeEffect() {
-        System.out.println(target.getName() + " is no longer burning.");
+        System.out.println(target.getName() + " is no longer poisoned.");
     }
 
     @Override
