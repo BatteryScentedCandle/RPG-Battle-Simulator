@@ -25,15 +25,17 @@ public class FactoryMage implements CharacterKit {
                 generateAttackName(),
                 3,
                 40,
-                1
+                1,
+                true
         );
     }
 
     @Override
     public List<AttackStrategy> createAttackStrategies() {
         return List.of(
-                new RangedAttack("Basic Spell", 1, 20, 1),
-                new RangedAttack(generateAttackName(), 3, 40, 1)
+                new MagicAttack("Basic Spell", 1, 20, 1, false),
+                new MagicAttack("Quick Spell", 1, 10, 1, true),
+                new MagicAttack(generateAttackName(), 3, 40, 1, true)
         );
     }
 

@@ -24,15 +24,16 @@ public class FactoryArcher implements CharacterKit {
                 generateAttackName(),
                 3,
                 25,
-                1
+                1,
+                true
         );
     }
 
     @Override
     public List<AttackStrategy> createAttackStrategies() {
         return List.of(
-                new RangedAttack("Basic Shot", 1, 20, 1),
-                new RangedAttack(generateAttackName(), 3, 25, 1)
+                new RangedAttack("Basic Shot", 1, 20, 1, false),
+                new RangedAttack(generateAttackName(), 3, 25, 1, true)
         );
     }
 

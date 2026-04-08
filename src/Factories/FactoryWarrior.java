@@ -32,8 +32,8 @@ public class FactoryWarrior implements CharacterKit {
     @Override
     public List<AttackStrategy> createAttackStrategies() {
         return List.of(
-                new RangedAttack("Basic Hit", 1, 20, 1),
-                new RangedAttack(generateAttackName(), 1, 35, 1)
+                new MeleeAttack("Basic Hit", 1, 20, 1),
+                new MeleeAttack(generateAttackName(), 1, 35, 1)
         );
     }
 

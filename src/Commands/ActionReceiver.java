@@ -36,6 +36,14 @@ public class ActionReceiver {
       }
    }
 
+   public void applyBonusDamage(int damage) {
+      enemyCharacter.takeDamage(damage);
+      notifyDamage(playerCharacter.getName(), "Arcane Aftershock", enemyCharacter.getName(), damage);
+      if (!enemyCharacter.isAlive()) {
+         notifyDeath(enemyCharacter.getName());
+      }
+   }
+
    public void performEnemyAttack() {
       int damage = enemyCharacter.getAttackPower();
       playerCharacter.takeDamage(damage);

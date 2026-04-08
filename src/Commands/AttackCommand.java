@@ -20,6 +20,18 @@ public class AttackCommand implements Command {
         AttackStrategy strategy = player.getAttacks().get(attackIndex);
         AttackContext context = new AttackContext(strategy);
         int totalDamage = context.calculateDamage(player.getAttackPower());
+
         receiver.performAttack(totalDamage, context.getAttackName());
+
+
+        //Archer Attack Bonus
+        if (strategy.isDoubleHit()) {
+            receiver.performAttack(totalDamage, context.getAttackName() + " [2nd Hit]");
+        }
+
+        //Magician Attack Bonus
+        if (strategy.hasHitEffect()) {
+            receiver.applyBonusDamage(10);
+        }
     }
 }

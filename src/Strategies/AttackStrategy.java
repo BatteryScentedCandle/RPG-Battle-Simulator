@@ -5,7 +5,8 @@ public interface AttackStrategy {
     int getDamage();
     int getTargetCount();
     String getAttackName();
-
+    default boolean isDoubleHit() { return false; }
+    default boolean hasHitEffect() { return false; }
 
     //String getDamageType(); Ignore for now as
 }

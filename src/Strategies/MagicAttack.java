@@ -5,13 +5,15 @@ public class MagicAttack implements AttackStrategy {
     private int range;
     private int damage;
     private int targetCount;
+    private boolean hasHitEffect;
     //private final String damageType = "Magic";
 
-    public MagicAttack(String attackName, int range, int damage, int targetCount) {
+    public MagicAttack(String attackName, int range, int damage, int targetCount, boolean hasHitEffect) {
         this.attackName = attackName;
         this.range = range;
         this.damage = damage;
         this.targetCount = targetCount;
+        this.hasHitEffect = hasHitEffect;
     }
 
     @Override
@@ -32,6 +34,11 @@ public class MagicAttack implements AttackStrategy {
     @Override
     public String getAttackName() {
         return attackName;
+    }
+
+    @Override
+    public boolean hasHitEffect() {
+        return hasHitEffect;
     }
 
 }
