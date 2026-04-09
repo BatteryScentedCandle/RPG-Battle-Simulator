@@ -83,7 +83,7 @@ public abstract class CharacterClass {
         attack += amount;
     }
 
-    public void removeAttackBuff() {
+    public void removeAttackBuff(int amount) {
         attack = baseAttack;
     }
 
