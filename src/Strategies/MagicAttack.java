@@ -1,21 +1,19 @@
-public class rangedAttack implements attackStrategy{
+package Strategies;
+
+public class MagicAttack implements AttackStrategy {
     private String attackName;
     private int range;
     private int damage;
     private int targetCount;
-    //private final String damageType = "Ranged";
+    private boolean hasHitEffect;
+    //private final String damageType = "Magic";
 
-    public rangedAttack(String attackName, int range, int damage, int targetCount) {
+    public MagicAttack(String attackName, int range, int damage, int targetCount, boolean hasHitEffect) {
         this.attackName = attackName;
         this.range = range;
         this.damage = damage;
         this.targetCount = targetCount;
-    }
-
-    @Override
-    public void attackTarget(String attackerName) {
-        System.out.println(attackerName + " used " + attackName);
-        System.out.println("Damage dealt: " + damage);
+        this.hasHitEffect = hasHitEffect;
     }
 
     @Override
@@ -38,9 +36,9 @@ public class rangedAttack implements attackStrategy{
         return attackName;
     }
 
-//    @Override
-//    public String getDamageType() {
-//        return damageType;
-//    }
-}
+    @Override
+    public boolean hasHitEffect() {
+        return hasHitEffect;
+    }
 
+}

@@ -1,21 +1,17 @@
-public class magicAttack implements attackStrategy{
+package Strategies;
+
+public class MeleeAttack implements AttackStrategy {
     private String attackName;
     private int range;
     private int damage;
     private int targetCount;
-    //private final String damageType = "Magic";
+    //private final String damageType = "Melee";
 
-    public magicAttack(String attackName, int range, int damage, int targetCount) {
+    public MeleeAttack(String attackName, int range, int damage, int targetCount) {
         this.attackName = attackName;
         this.range = range;
         this.damage = damage;
         this.targetCount = targetCount;
-    }
-
-    @Override
-    public void attackTarget(String attackerName) {
-        System.out.println(attackerName + " used " + attackName);
-        System.out.println("Damage dealt: " + damage);
     }
 
     @Override
@@ -37,5 +33,11 @@ public class magicAttack implements attackStrategy{
     public String getAttackName() {
         return attackName;
     }
+
+//    @Override
+//    public String getDamageType() {
+//        return damageType;
+//    }
+
 
 }

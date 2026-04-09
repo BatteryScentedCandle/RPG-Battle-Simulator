@@ -1,23 +1,20 @@
-public class meleeAttack implements attackStrategy{
+package Strategies;
+
+public class RangedAttack implements AttackStrategy {
     private String attackName;
     private int range;
     private int damage;
     private int targetCount;
-    //private final String damageType = "Melee";
+    private boolean isDoubleHit;
+    //private final String damageType = "Ranged";
 
-    public meleeAttack(String attackName, int range, int damage, int targetCount) {
+    public RangedAttack(String attackName, int range, int damage, int targetCount, boolean isDoubleHit) {
         this.attackName = attackName;
         this.range = range;
         this.damage = damage;
         this.targetCount = targetCount;
+        this.isDoubleHit = isDoubleHit;
     }
-
-    @Override
-    public void attackTarget(String attackerName) {
-        System.out.println(attackerName + " used " + attackName);
-        System.out.println("Damage dealt: " + damage);
-    }
-
 
     @Override
     public int getRange() {
@@ -39,10 +36,14 @@ public class meleeAttack implements attackStrategy{
         return attackName;
     }
 
+    @Override
+    public boolean isDoubleHit() {
+        return isDoubleHit;
+    }
+
 //    @Override
 //    public String getDamageType() {
 //        return damageType;
 //    }
-
-
 }
+
