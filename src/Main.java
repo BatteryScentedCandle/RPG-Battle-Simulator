@@ -30,14 +30,14 @@ public class Main {
     private static CharacterClass generateRandomEnemy() {
         Random random = new Random();
 
-        String[] prefixes = {"Dark", "Ancient", "Cursed", "Wicked", "Savage"};
-        String[] names    = {"Goliath", "Ravager", "Colossus", "Behemoth", "Tyrant"};
+        String[] prefixes = {"God", "Ancient", "Cursed", "Celestial", "Reverse"};
+        String[] names    = {"Shiva", "Ifrit", "Leviathan", "Bahamut", "Ragnarok"};
 
         String enemyName = "[Boss] - " + prefixes[random.nextInt(prefixes.length)]
                 + " " + names[random.nextInt(names.length)];
 
-        int hp        = 100 + random.nextInt(101); // 100–200
-        int attack    = 20  + random.nextInt(31);  // 20–50
+        int hp        = 150 + random.nextInt(101); // 150–250
+        int attack    = 40  + random.nextInt(31);  // 40–70
         int defense   = 5   + random.nextInt(16);  // 5–20
 
         return new Boss(enemyName, hp, hp, attack, defense);
@@ -49,6 +49,10 @@ public class Main {
 
         System.out.print("What is your name? ");
         String defaultName = scan.next();
+
+        if (defaultName.isBlank()) {
+            defaultName = "Terra";
+        }
 
         // ===== CLASS SELECTION =====
         System.out.println("\nChoose Character Class: ");
