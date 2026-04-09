@@ -31,8 +31,8 @@ public class UseItemCommand implements Command{
     public void execute() {
         System.out.println("\nChoose Item: ");
         System.out.println("1 - Potion (Heals Player by 30% of their Max Health)");
-        System.out.println("2 - Hi-Potion (Fully heals the Player");
-        System.out.println("3 - Rouge Doll (Adds a random debuff to an enemy");
+        System.out.println("2 - Hi-Potion (Fully heals the Player)");
+        System.out.println("3 - Rouge Doll (Adds a random debuff to an enemy)");
 
         int itemChoice = getValidInput("Enter choice (1-3): ", 1, 3);
 
