@@ -23,11 +23,6 @@ public class ActionInvoker {
         receiver.notifyTurnStart(playerCharacter.getName());
         command.execute();
         playerCharacter.tickEffects();
-//        try {
-//            Thread.sleep(2000);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
         history.push(command);
     }
 

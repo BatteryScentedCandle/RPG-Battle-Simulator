@@ -47,8 +47,6 @@ public class ActionReceiver {
    public void performEnemyAttack() {
       int damage = enemyCharacter.getAttackPower();
       playerCharacter.takeDamage(damage);
-
-      //Icba to make a dedicated attack for him
       notifyDamage(enemyCharacter.getName(), "GARGANTUA PUNISHER", playerCharacter.getName(), damage);
       if (!playerCharacter.isAlive()) {
          notifyDeath(playerCharacter.getName());
@@ -85,10 +83,9 @@ public class ActionReceiver {
       playerCharacter.healDamage(playerCharacter.getMaxHealth());
    }
 
-   //TODO EFFECTS
    public void useRougeDoll() {
        Random random = new Random();
-       int randomEffect = random.nextInt(2); //add +1 if you need to add more effects
+       int randomEffect = random.nextInt(2);
 
        switch (randomEffect){
            case 0:
@@ -106,7 +103,7 @@ public class ActionReceiver {
    }
 
 
-   // --- Brave --- This is meant to replace run, this acts as the attackbuff effect to the user
+   // --- Brave ---
    public void performBrave() {
       if (isBraved) return; // prevent stacking
       Effects attackBuff = new AttackBuffDecorator(new NullDecorater(), playerCharacter);

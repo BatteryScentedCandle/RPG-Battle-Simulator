@@ -21,7 +21,7 @@ public class AttackBuffDecorator extends EffectsDecorator {
 
     @Override
     public void removeEffect() {
-        target.removeAttackBuff(buffAmount);
+        target.removeAttackBuff();
         System.out.println(target.getName() + "'s attack buff wore off.");
     }
 

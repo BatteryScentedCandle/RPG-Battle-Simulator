@@ -47,6 +47,10 @@ public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
+        SoundPlayer.playSound("title.wav", true);
+
+        System.out.println("Welcome...");
+
         System.out.print("What is your name? ");
         String defaultName = scan.next();
 
@@ -75,6 +79,9 @@ public class Main {
         boolean keepPlaying = true;
 
         while (keepPlaying) {
+
+            SoundPlayer.playSound("battle.wav", true);
+
             assert kit != null;
             CharacterClass playerCharacter = kit.createCharacter(defaultName);
             playerCharacter.setAttacks(kit.createAttackStrategies());
@@ -126,8 +133,10 @@ public class Main {
             // ===== RESULT =====
             if (playerCharacter.isAlive()) {
                 System.out.println("\n🏆 VICTORY! " + enemyCharacter.getName() + " was defeated!");
+                SoundPlayer.playSound("victory.wav", false);
             } else {
                 System.out.println("\n💀 DEFEAT! " + playerCharacter.getName() + " has fallen...");
+                SoundPlayer.playSound("lost.wav", false);
             }
 
             // ===== PLAY AGAIN =====

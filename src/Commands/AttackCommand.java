@@ -7,7 +7,7 @@ import Strategies.AttackStrategy;
 public class AttackCommand implements Command {
     private final ActionReceiver receiver;
     private final CharacterClass player;
-    private final int attackIndex;          // which attack to use
+    private final int attackIndex;
 
     public AttackCommand(ActionReceiver receiver, CharacterClass player, int attackIndex) {
         this.receiver = receiver;
@@ -24,12 +24,12 @@ public class AttackCommand implements Command {
         receiver.performAttack(totalDamage, context.getAttackName());
 
 
-        //Archer Attack Bonus
+        //Archer Special Trait
         if (strategy.isDoubleHit()) {
             receiver.performAttack(totalDamage, context.getAttackName() + " [2nd Hit]");
         }
 
-        //Magician Attack Bonus
+        //Magician Special Trait
         if (strategy.hasHitEffect()) {
             receiver.applyBonusDamage(10);
         }

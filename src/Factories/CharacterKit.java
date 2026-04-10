@@ -5,8 +5,8 @@ import java.util.List;
 
 public interface CharacterKit {
     CharacterClass createCharacter(String name);
-    AttackStrategy createAttackStrategy();           // keep for backwards compat
-    default List<AttackStrategy> createAttackStrategies() {  // new
+    AttackStrategy createAttackStrategy();
+    default List<AttackStrategy> createAttackStrategies() {
         return List.of(createAttackStrategy());
     }
 }

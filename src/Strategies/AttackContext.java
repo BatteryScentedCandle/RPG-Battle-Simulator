@@ -7,10 +7,6 @@ public class AttackContext {
         this.strategy = strategy;
     }
 
-    public void setStrategy(AttackStrategy strategy) {
-        this.strategy = strategy;
-    }
-
     // Combines base power + strategy bonus
     public int calculateDamage(int baseAttackPower) {
         return baseAttackPower + strategy.getDamage();
